@@ -2,12 +2,12 @@
 
 require 'pry-byebug'
 
-def merge(left = [], right = [])
+def merge(left, right)
   arr = []
   r_pointer = 0
   l_pointer = 0
 
-  while true
+  loop do
     if l_pointer >= left.length
       arr.concat right[r_pointer..]
       break
