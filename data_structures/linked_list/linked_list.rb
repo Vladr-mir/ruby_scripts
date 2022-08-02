@@ -21,11 +21,12 @@ class LinkedList
   def prepend(value)
     @size += 1
     return @head = Node.new(value, nil) if @head.nil?
+
     @head = Node.new(value, @head)
   end
 
   def tail
-    return @head = Node.new(value, nil) if @head.nil?
+    return Node.new(nil, nil) if @head.nil?
 
     last_node = @head
     last_node = last_node.next_node until last_node.next_node.nil?
@@ -33,20 +34,61 @@ class LinkedList
   end
 
   def at(index)
-    return Node.new(nil, nil) if index >= @size
+    return Node.new(nil, nil) unless index.between?(0, @size - 1)
 
     last_node = @head
     0.upto(index).each do |pos|
       return last_node if pos == index
+
       last_node = last_node.next_node
     end
   end
 
+  def to_s
+    return '()' if @head.nil?
+
+    str = ''
+
+    last_node = @head
+    str << "(#{@head.value})"
+    until last_node.next_node.nil?
+      last_node = last_node.next_node
+      str << " -> (#{last_node.value})"
+    end
+    str << ' -> nil'
+  end
+
   def pop
-    return @head = Node.new(value, nil) if @head.nil?
+    return Node.new(nil, nil) if @head.nil?
 
     @size -= 1
-    self.at(size - 1).destroy_next
+    at(size - 1).destroy_next
+  end
+
+  def find(value)
+    index = 0
+    return nil if @head.nil?
+    return index if @head.value == value
+
+    last_node = @head
+    until last_node.next_node.nil?
+      index += 1
+      last_node = last_node.next_node
+      return index if last_node.value == value
+    end
+    nil
+  end
+
+  def contains?(value)
+    return false if @head.nil?
+    return true if @head.value == value
+
+    last_node = @head
+    until last_node.next_node.nil?
+      last_node = last_node.next_node
+      return true if last_node.value == value
+    end
+    false
   end
 end
 
