@@ -21,6 +21,20 @@ class BinaryTree
     root
   end
 
+  def find(value, root = @root)
+    return root if root.data == value
+
+    if root.data < value
+      return Node.new(nil) if root.right.nil?
+
+      find(value, root.right)
+    else
+      return Node.new(nil) if root.left.nil?
+
+      find(value, root.left)
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
