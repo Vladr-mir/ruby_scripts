@@ -21,6 +21,18 @@ class BinaryTree
     root
   end
 
+  def insert(value, root = @root)
+    if root.data < value
+      return root.right = Node.new(value) if root.right.nil?
+
+      insert(value, root.right)
+    else
+      return root.left = Node.new(value) if root.left.nil?
+
+      insert(value, root.left)
+    end
+  end
+
   def find(value, root = @root)
     return root if root.data == value
 
