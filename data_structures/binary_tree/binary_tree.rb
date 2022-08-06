@@ -2,7 +2,7 @@
 
 require_relative 'node'
 
-# BinaryTree impolementation
+# BinaryTree implementation
 class BinaryTree
   attr_reader :root
 
