@@ -33,6 +33,30 @@ class BinaryTree
     end
   end
 
+  def preorder(root = @root, &operation)
+    return if root.nil?
+
+    operation.call(root)
+    preorder(root.left, &operation)
+    preorder(root.right, &operation)
+  end
+
+  def inorder(root = @root, &operation)
+    return if root.nil?
+
+    inorder(root.left, &operation) unless root.left.nil?
+    operation.call(root)
+    inorder(root.right, &operation) unless root.right.nil?
+  end
+
+  def postorder(root = @root, &operation)
+    return if root.nil?
+
+    postorder(root.left, &operation) unless root.left.nil?
+    postorder(root.right, &operation) unless root.right.nil?
+    operation.call(root)
+  end
+
   def find(value, root = @root)
     return root if root.data == value
 
