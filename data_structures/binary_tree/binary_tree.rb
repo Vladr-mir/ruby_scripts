@@ -21,15 +21,17 @@ class BinaryTree
     root
   end
 
-  def insert(value, root = @root)
-    if root.data < value
-      return root.right = Node.new(value) if root.right.nil?
+  def insert(value, node = @root)
+    return if node.data == value
 
-      insert(value, root.right)
+    if node.data < value
+      return node.right = Node.new(value) if node.right.nil?
+
+      insert(value, node.right)
     else
-      return root.left = Node.new(value) if root.left.nil?
+      return node.left = Node.new(value) if node.left.nil?
 
-      insert(value, root.left)
+      insert(value, node.left)
     end
   end
 
