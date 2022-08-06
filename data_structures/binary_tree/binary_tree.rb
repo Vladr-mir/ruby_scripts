@@ -57,18 +57,8 @@ class BinaryTree
     operation.call(root)
   end
 
-  def find(value, root = @root)
-    return root if root.data == value
-
-    if root.data < value
-      return Node.new(nil) if root.right.nil?
-
-      find(value, root.right)
-    else
-      return Node.new(nil) if root.left.nil?
-
-      find(value, root.left)
-    end
+  def find(value)
+    preorder { |node| return node if node.data == value }
   end
 
   def pretty_print(node = @root, prefix = '', is_left: true)
