@@ -48,28 +48,28 @@ class BinaryTree
     end
   end
 
-  def preorder(root = @root, &operation)
-    return if root.nil?
+  def preorder(node = @root, &operation)
+    return if node.nil?
 
-    operation.call(root)
-    preorder(root.left, &operation)
-    preorder(root.right, &operation)
+    operation.call(node)
+    preorder(node.left, &operation)
+    preorder(node.right, &operation)
   end
 
-  def inorder(root = @root, &operation)
-    return if root.nil?
+  def inorder(node = @root, &operation)
+    return if node.nil?
 
-    inorder(root.left, &operation) unless root.left.nil?
-    operation.call(root)
-    inorder(root.right, &operation) unless root.right.nil?
+    inorder(node.left, &operation) unless node.left.nil?
+    operation.call(node)
+    inorder(node.right, &operation) unless node.right.nil?
   end
 
-  def postorder(root = @root, &operation)
-    return if root.nil?
+  def postorder(node = @root, &operation)
+    return if node.nil?
 
-    postorder(root.left, &operation) unless root.left.nil?
-    postorder(root.right, &operation) unless root.right.nil?
-    operation.call(root)
+    postorder(node.left, &operation) unless node.left.nil?
+    postorder(node.right, &operation) unless node.right.nil?
+    operation.call(node)
   end
 
   def find(value)
