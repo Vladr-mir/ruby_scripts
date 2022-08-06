@@ -33,6 +33,19 @@ class BinaryTree
     end
   end
 
+  def level_order(node = @root, &operation)
+    return if node.nil?
+
+    queue = [node]
+    until queue.empty?
+      current = queue[0]
+      operation.call(current)
+      queue << current.left unless current.left.nil?
+      queue << current.right unless current.right.nil?
+      queue.shift
+    end
+  end
+
   def preorder(root = @root, &operation)
     return if root.nil?
 
