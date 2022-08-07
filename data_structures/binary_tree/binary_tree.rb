@@ -140,6 +140,12 @@ class BinaryTree
     right == left
   end
 
+  def rebalance
+    elements = []
+    inorder { |node| elements << node.data }
+    self.class.new(elements)
+  end
+
   private
 
   def leftmost(node = @root)
