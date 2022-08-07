@@ -76,9 +76,43 @@ class BinaryTree
     preorder { |node| return node if node.data == value }
   end
 
+  def delete(value, node = @root)
+    return node if node.nil?
+
+    if value < node.data
+      node.left = delete(value, node.left)
+    elsif value > node.data
+      node.right = delete(value, node.right)
+    else
+      return node.right if node.left.nil?
+      return node.left if node.right.nil?
+
+      leftmost_node = leftmost(node.right)
+      node.data = leftmost_node.data
+      node.right = delete(leftmost_node.data, node.right)
+    end
+    node
+  end
+
   def pretty_print(node = @root, prefix = '', is_left: true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", is_left: false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", is_left: true) if node.left
+  end
+
+  def get_parent(value)
+    preorder do |node|
+      return node if !node.right.nil? && (node.right.data == value)
+      return node if !node.left.nil? && (node.left.data == value)
+    end
+  end
+
+  private
+
+  def leftmost(node = @root)
+    return node if node.left.nil? && node.right.nil?
+
+    node = node.left until node.left.nil?
+    node
   end
 end
