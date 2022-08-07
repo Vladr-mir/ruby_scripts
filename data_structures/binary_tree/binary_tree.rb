@@ -107,6 +107,29 @@ class BinaryTree
     end
   end
 
+  def height(node = @root)
+    return 0 if node.nil?
+
+    right_height = height(node.right)
+    left_height = height(node.left)
+
+    [right_height, left_height].max + 1
+  end
+
+  def depth(target_node = @root, node = @root)
+    return 0 if node.nil?
+    return 0 if node == target_node
+
+    if target_node.data < node.data
+      left_height = depth(target_node, node.left)
+      right_height = 0
+    else
+      right_height = depth(target_node, node.right)
+      left_height = 0
+    end
+    [right_height, left_height].max + 1
+  end
+
   private
 
   def leftmost(node = @root)
