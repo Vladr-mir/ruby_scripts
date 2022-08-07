@@ -130,6 +130,16 @@ class BinaryTree
     [right_height, left_height].max + 1
   end
 
+  def balanced?
+    return true if @root.nil?
+    return true if @root.right.nil? && @root.left.nil?
+
+    right = height(@root.right)
+    left = height(@root.left)
+
+    right == left
+  end
+
   private
 
   def leftmost(node = @root)
