@@ -36,5 +36,3 @@ def merge_sort(arr = [])
 
   merge(left, right)
 end
-
-p merge_sort([3, 8, 5, 3, 4, 7, 9, 1, 10])
