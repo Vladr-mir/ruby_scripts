@@ -12,8 +12,5 @@ def fibs_rec(num, index = 2, result = [0, 1])
   return result if index >= num
 
   result << (result[index - 2] + result[index - 1])
-  fibs_rec(num, i + 1, result)
+  fibs_rec(num, index + 1, result)
 end
-
-p fibs(8)
-p fibs_rec(8)
